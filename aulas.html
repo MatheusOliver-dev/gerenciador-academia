@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aulas - Gerenciador de Academia</title>
+    <link href="bibliotecas/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">Gerenciador de Academia</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a class="nav-link" href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+                <a class="nav-link active" href="aulas.html"><i class="fas fa-book"></i> Aulas</a>
+                <a class="nav-link" href="cargos.html"><i class="fas fa-briefcase"></i> Cargos</a>
+                <a class="nav-link" href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+                <a class="nav-link" href="estoque.html"><i class="fas fa-dumbbell"></i> Estoque</a>
+                <a class="nav-link" href="financeiro.html"><i class="fas fa-dollar-sign"></i> Financeiro</a>
+                <a class="nav-link" href="funcionarios.html"><i class="fas fa-user-tie"></i> Funcionários</a>
+                <a class="nav-link" href="instrutores.html"><i class="fas fa-chalkboard-teacher"></i> Instrutores</a>
+                <a class="nav-link" href="planos.html"><i class="fas fa-list-alt"></i> Planos</a>
+                <a class="nav-link" href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Aulas</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Duração</th>
+                    <th>Instrutor</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaAulas"></tbody>
+        </table>
+
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCadastroAulas"><i class="fas fa-plus-circle"></i> Cadastrar Nova Aula</button>
+        <button class="btn btn-warning" id="btnEditarAula" disabled data-bs-toggle="modal" data-bs-target="#modalEdicaoAulas"><i class="fas fa-edit"></i> Editar Aula</button>
+        <button class="btn btn-danger" id="btnRemoverAula" disabled><i class="fas fa-trash-alt"></i> Remover Aula</button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Voltar</a>
+    </div>
+
+    <div class="modal fade" id="modalCadastroAulas" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Cadastrar Aula</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCadastroAulas">
+                        <div class="mb-3">
+                            <label class="form-label">Nome da Aula:</label>
+                            <input type="text" id="nomeCadastroAulas" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Descrição:</label>
+                            <textarea id="descricaoCadastroAulas" class="form-control" rows="3" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Duração (hh:mm:ss):</label>
+                            <input type="text" id="duracaoCadastroAulas" class="form-control" placeholder="hh:mm:ss" required maxlength="8">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Instrutor Responsável:</label>
+                            <select id="instrutorCadastroAulas" class="form-select" required>
+                                <option value="">Selecione um instrutor</option>
+                                <option value="Carlos Silva">Carlos Silva</option>
+                                <option value="Ana Souza">Ana Souza</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Cadastrar Aula</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEdicaoAulas" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title">Editar Aula</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdicaoAulas">
+                        <input type="hidden" id="idEdicaoAulas">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nome da Aula:</label>
+                            <input type="text" id="nomeEdicaoAulas" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Descrição:</label>
+                            <textarea id="descricaoEdicaoAulas" class="form-control" rows="3" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Duração (hh:mm:ss):</label>
+                            <input type="text" id="duracaoEdicaoAulas" class="form-control" required maxlength="8">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Instrutor Responsável:</label>
+                            <select id="instrutorEdicaoAulas" class="form-select" required>
+                                <option value="">Selecione um instrutor</option>
+                                <option value="Carlos Silva">Carlos Silva</option>
+                                <option value="Ana Souza">Ana Souza</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning text-white">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bibliotecas/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bibliotecas/jquery/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>

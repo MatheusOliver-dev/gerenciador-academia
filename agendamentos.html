@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamentos - Gerenciador de Academia</title>
+    <link href="bibliotecas/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">Gerenciador de Academia</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a class="nav-link active" href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+                <a class="nav-link" href="aulas.html"><i class="fas fa-book"></i> Aulas</a>
+                <a class="nav-link" href="cargos.html"><i class="fas fa-briefcase"></i> Cargos</a>
+                <a class="nav-link" href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+                <a class="nav-link" href="estoque.html"><i class="fas fa-dumbbell"></i> Estoque</a>
+                <a class="nav-link" href="financeiro.html"><i class="fas fa-dollar-sign"></i> Financeiro</a>
+                <a class="nav-link" href="funcionarios.html"><i class="fas fa-user-tie"></i> Funcionários</a>
+                <a class="nav-link" href="instrutores.html"><i class="fas fa-chalkboard-teacher"></i> Instrutores</a>
+                <a class="nav-link" href="planos.html"><i class="fas fa-list-alt"></i> Planos</a>
+                <a class="nav-link" href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Agendamentos</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Aula</th>
+                    <th>Data e Hora Início</th>
+                    <th>Data e Hora Fim</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaAgendamentos">
+            </tbody>
+        </table>
+
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCadastro"> <i class="fas fa-plus-circle"></i> Cadastrar Novo
+            Agendamento</button>
+        <button class="btn btn-warning" id="btnEditar" disabled data-bs-toggle="modal"
+            data-bs-target="#modalEdicao"><i class="fas fa-edit"></i> Editar Agendamento</button>
+        <button class="btn btn-danger" id="btnRemover" disabled><i class="fas fa-trash-alt"></i> Remover Agendamento</button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Voltar</a>
+    </div>
+
+    <div class="modal fade" id="modalCadastro" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Cadastrar Agendamento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCadastro">
+                        <div class="mb-3">
+                            <label class="form-label">Aula:</label>
+                            <select id="aulaCadastro" class="form-select" required>
+                                <option value="">Selecione uma aula</option>
+                                <option value="Yoga">Yoga</option>
+                                <option value="Musculação">Musculação</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data e Hora Início:</label>
+                                <input type="datetime-local" id="inicioCadastro" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data e Hora Fim:</label>
+                                <input type="datetime-local" id="fimCadastro" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Observações:</label>
+                            <textarea id="obsCadastro" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status:</label>
+                            <select id="statusCadastro" class="form-select" required>
+                                <option>PENDENTE</option>
+                                <option>CONCLUÍDO</option>
+                                <option>REMARCADO</option>
+                                <option>CANCELADO</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Cadastrar Agendamento</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEdicao" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title">Editar Agendamento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdicao">
+                        <input type="hidden" id="idEdicao">
+
+                        <div class="mb-3">
+                            <label class="form-label">Aula:</label>
+                            <select id="aulaEdicao" class="form-select" required>
+                                <option value="">Selecione uma aula</option>
+                                <option value="Yoga">Yoga</option>
+                                <option value="Musculação">Musculação</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data e Hora Início:</label>
+                                <input type="datetime-local" id="inicioEdicao" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data e Hora Fim:</label>
+                                <input type="datetime-local" id="fimEdicao" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Observações:</label>
+                            <textarea id="obsEdicao" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status:</label>
+                            <select id="statusEdicao" class="form-select" required>
+                                <option>PENDENTE</option>
+                                <option>CONCLUÍDO</option>
+                                <option>REMARCADO</option>
+                                <option>CANCELADO</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning text-white">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="bibliotecas/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bibliotecas/jquery/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

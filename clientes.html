@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - Gerenciador de Academia</title>
+    <link href="bibliotecas/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">Gerenciador de Academia</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a class="nav-link" href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+                <a class="nav-link" href="aulas.html"><i class="fas fa-book"></i> Aulas</a>
+                <a class="nav-link" href="cargos.html"><i class="fas fa-briefcase"></i> Cargos</a>
+                <a class="nav-link active" href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+                <a class="nav-link" href="estoque.html"><i class="fas fa-dumbbell"></i> Estoque</a>
+                <a class="nav-link" href="financeiro.html"><i class="fas fa-dollar-sign"></i> Financeiro</a>
+                <a class="nav-link" href="funcionarios.html"><i class="fas fa-user-tie"></i> Funcionários</a>
+                <a class="nav-link" href="instrutores.html"><i class="fas fa-chalkboard-teacher"></i> Instrutores</a>
+                <a class="nav-link" href="planos.html"><i class="fas fa-list-alt"></i> Planos</a>
+                <a class="nav-link" href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Clientes</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Sexo</th>
+                    <th>Data de Nascimento</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Início na Academia</th>
+                    <th>Plano</th>
+                    <th>Status Pagamento</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaClientes"></tbody>
+        </table>
+
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCadastroClientes"><i class="fas fa-plus-circle"></i> Cadastrar Novo
+            Cliente</button>
+        <button class="btn btn-warning" id="btnEditarCliente" disabled data-bs-toggle="modal"
+            data-bs-target="#modalEdicaoClientes"><i class="fas fa-edit"></i> Editar Cliente</button>
+        <button class="btn btn-danger" id="btnRemoverCliente" disabled><i class="fas fa-trash-alt"></i> Remover Cliente</button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Voltar</a>
+    </div>
+
+    <div class="modal fade" id="modalCadastroClientes" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Cadastrar Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCadastroClientes">
+                        <div class="mb-3">
+                            <label class="form-label">Nome:</label>
+                            <input type="text" id="nomeCadastroCliente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">CPF:</label>
+                            <input type="text" id="cpfCadastroCliente" class="form-control" maxlength="14">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sexo:</label>
+                            <select id="sexoCadastroCliente" class="form-select" required>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data de Nascimento:</label>
+                                <input type="date" id="dataNascimentoCadastroCliente" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data de Início na Academia:</label>
+                                <input type="date" id="dataInicioAcademiaCadastroCliente" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Endereço:</label>
+                            <input type="text" id="enderecoCadastroCliente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefone:</label>
+                            <input type="text" id="telefoneCadastroCliente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">E-mail:</label>
+                            <input type="email" id="emailCadastroCliente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Plano:</label>
+                            <select id="planoCadastroCliente" class="form-select" required>
+                                <option value="">Selecione um plano:</option>
+                                <option value="Plano Básico">Plano Básico</option>
+                                <option value="Plano Premium">Plano Premium</option>
+                                <option value="Plano VIP">Plano VIP</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status do Pagamento:</label>
+                            <select id="statusCadastroCliente" class="form-select" required>
+                                <option value="Pago">Pago</option>
+                                <option value="Pendente">Pendente</option>
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Cadastrar Cliente</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEdicaoClientes" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title">Editar Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdicaoClientes">
+                        <input type="hidden" id="idEdicaoCliente">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nome:</label>
+                            <input type="text" id="nomeEdicaoCliente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">CPF:</label>
+                            <input type="text" id="cpfEdicaoCliente" class="form-control" maxlength="14">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Sexo:</label>
+                            <select id="sexoEdicaoCliente" class="form-select" required>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data de Nascimento:</label>
+                                <input type="date" id="dataNascimentoEdicaoCliente" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data de Início na Academia:</label>
+                                <input type="date" id="dataInicioAcademiaEdicaoCliente" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Endereço:</label>
+                            <input type="text" id="enderecoEdicaoCliente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefone:</label>
+                            <input type="text" id="telefoneEdicaoCliente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">E-mail:</label>
+                            <input type="email" id="emailEdicaoCliente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Plano:</label>
+                            <select id="planoEdicaoCliente" class="form-select" required>
+                                <option value="">Selecione um plano:</option>
+                                <option value="Plano Básico">Plano Básico</option>
+                                <option value="Plano Premium">Plano Premium</option>
+                                <option value="Plano VIP">Plano VIP</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status do Pagamento:</label>
+                            <select id="statusEdicaoCliente" class="form-select" required>
+                                <option value="Pago">Pago</option>
+                                <option value="Pendente">Pendente</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning text-white">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bibliotecas/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bibliotecas/jquery/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

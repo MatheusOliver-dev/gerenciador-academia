@@ -1,0 +1,166 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.login-body {
+    background: url("../img/background.png") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.login-container {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-box {
+    width: 100%;
+}
+
+.login-box h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+    width: 100%;
+}
+
+.input-group label {
+    color: #ffffff;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+    display: block;
+    font-size: 16px;
+    background-color: #f0f8ff;
+    color: #003366;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #0056b3;
+}
+
+.navbar {
+    background-color: #004080;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+#userName {
+    margin-right: 15px;
+}
+
+.logout-icon {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.dashboard-container {
+    text-align: center;
+    margin: 20px;
+}
+
+h2 {
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    max-width: 900px;
+    margin: auto;
+}
+
+.grid-item {
+    background: #0f73dd;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 180px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.grid-item:hover {
+    background: #0056b3;
+}
+
+.grid-item p {
+    font-size: 20px;
+    color: white;
+    margin-top: 5px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.grid-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.grid-item:hover img {
+    transform: scale(1.1);
+}

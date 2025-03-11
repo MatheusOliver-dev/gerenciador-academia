@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas - Gerenciador de Academia</title>
+    <link href="bibliotecas/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">Gerenciador de Academia</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a class="nav-link" href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+                <a class="nav-link" href="aulas.html"><i class="fas fa-book"></i> Aulas</a>
+                <a class="nav-link" href="cargos.html"><i class="fas fa-briefcase"></i> Cargos</a>
+                <a class="nav-link" href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+                <a class="nav-link" href="estoque.html"><i class="fas fa-dumbbell"></i> Estoque</a>
+                <a class="nav-link" href="financeiro.html"><i class="fas fa-dollar-sign"></i> Financeiro</a>
+                <a class="nav-link" href="funcionarios.html"><i class="fas fa-user-tie"></i> Funcionários</a>
+                <a class="nav-link" href="instrutores.html"><i class="fas fa-chalkboard-teacher"></i> Instrutores</a>
+                <a class="nav-link" href="planos.html"><i class="fas fa-list-alt"></i> Planos</a>
+                <a class="nav-link active" href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Vendas</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Total</th>
+                    <th>Status Pagamento</th>
+                    <th>Funcionário</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaVendas"></tbody>
+        </table>
+
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCadastroVenda"><i class="fas fa-plus-circle"></i> Cadastrar Nova Venda</button>
+        <button class="btn btn-warning" id="btnEditarVenda" disabled data-bs-toggle="modal" data-bs-target="#modalEdicaoVenda"><i class="fas fa-edit"></i> Editar Venda</button>
+        <button class="btn btn-danger" id="btnRemoverVenda" disabled><i class="fas fa-trash-alt"></i> Remover Venda</button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Voltar</a>
+    </div>
+
+    <div class="modal fade" id="modalCadastroVenda" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Cadastrar Venda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCadastroVenda">
+                        <div class="mb-3">
+                            <label class="form-label">Cliente:</label>
+                            <select id="clienteCadastroVenda" class="form-select" required>
+                                <option value="">Selecione um Cliente</option>
+                                <option value="João Silva">João Silva</option>
+                                <option value="Maria Oliveira">Maria Oliveira</option>
+                                <option value="Carlos Souza">Carlos Souza</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Data e Hora:</label>
+                            <input type="datetime-local" id="dataHoraCadastroVenda" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Produto:</label>
+                            <select id="produtoCadastroVenda" class="form-select" required>
+                                <option value="">Selecione um Produto</option>
+                                <option value="Academia Pass 1 Mês">Academia Pass 1 Mês</option>
+                                <option value="Academia Pass 3 Meses">Academia Pass 3 Meses</option>
+                                <option value="Suplemento Whey Protein">Suplemento Whey Protein</option>
+                                <option value="Massa Muscular 2kg">Massa Muscular 2kg</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Quantidade:</label>
+                            <input type="number" id="quantidadeCadastroVenda" class="form-control" min="1" required>
+                        </div>
+
+                        <button type="button" id="btnAdicionarProduto" class="btn btn-success">Adicionar Produto</button>
+
+                        <hr>
+                        <h5>Produtos Adicionados:</h5>
+                        <table class="table table-striped" id="tabelaProdutosAdicionados">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Unitário</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Pagamento:</label>
+                            <select id="tipoPagamentoCadastroVenda" class="form-select" required>
+                                <option value="">Selecione</option>
+                                <option value="Dinheiro">Dinheiro</option>
+                                <option value="PIX">PIX</option>
+                                <option value="Débito">Débito</option>
+                                <option value="Crédito">Crédito</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Quantidade de Parcelas:</label>
+                            <input type="number" id="parcelasCadastroVenda" class="form-control" min="1" value="1">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Total:</label>
+                            <input type="text" id="totalCadastroVenda" class="form-control" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status Pagamento:</label>
+                            <select id="statusPagamentoCadastroVenda" class="form-select" required>
+                                <option value="Pago">Pago</option>
+                                <option value="Pendente">Pendente</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Funcionário:</label>
+                            <select id="funcionarioCadastroVenda" class="form-select" required>
+                                <option value="">Selecione um Funcionário</option>
+                                <option value="Lucas Mendes">Lucas Mendes</option>
+                                <option value="Fernanda Costa">Fernanda Costa</option>
+                                <option value="Rafael Pereira">Rafael Pereira</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Cadastrar Venda</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEdicaoVenda" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title">Editar Venda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdicaoVenda">
+                        <input type="hidden" id="idEdicaoPlanos">
+
+                        <div class="mb-3">
+                            <label class="form-label">Cliente:</label>
+                            <select id="clienteEdicaoVenda" class="form-select" required>
+                                <option value="">Selecione um Cliente</option>
+                                <option value="João Silva">João Silva</option>
+                                <option value="Maria Oliveira">Maria Oliveira</option>
+                                <option value="Carlos Souza">Carlos Souza</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Data e Hora:</label>
+                            <input type="datetime-local" id="dataHoraEdicaoVenda" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Produto:</label>
+                            <select id="produtoEdicaoVenda" class="form-select" required>
+                                <option value="">Selecione um Produto</option>
+                                <option value="Academia Pass 1 Mês">Academia Pass 1 Mês</option>
+                                <option value="Academia Pass 3 Meses">Academia Pass 3 Meses</option>
+                                <option value="Suplemento Whey Protein">Suplemento Whey Protein</option>
+                                <option value="Massa Muscular 2kg">Massa Muscular 2kg</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Quantidade:</label>
+                            <input type="number" id="quantidadeEdicaoVenda" class="form-control" min="1" required>
+                        </div>
+
+                        <button type="button" id="btnAdicionarProdutoEdicao" class="btn btn-success">Adicionar Produto</button>
+
+                        <hr>
+                        <h5>Produtos Adicionados:</h5>
+                        <table class="table table-striped" id="tabelaProdutosAdicionados">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Unitário</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Pagamento:</label>
+                            <select id="tipoPagamentoEdicaoVenda" class="form-select" required>
+                                <option value="">Selecione</option>
+                                <option value="Dinheiro">Dinheiro</option>
+                                <option value="PIX">PIX</option>
+                                <option value="Débito">Débito</option>
+                                <option value="Crédito">Crédito</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Quantidade de Parcelas:</label>
+                            <input type="number" id="parcelasEdicaoVenda" class="form-control" min="1" value="1">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Total:</label>
+                            <input type="text" id="totalEdicaoVenda" class="form-control" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status Pagamento:</label>
+                            <select id="statusPagamentoEdicaoVenda" class="form-select" required>
+                                <option value="Pago">Pago</option>
+                                <option value="Pendente">Pendente</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Funcionário:</label>
+                            <select id="funcionarioEdicaoVenda" class="form-select" required>
+                                <option value="">Selecione um Funcionário</option>
+                                <option value="Lucas Mendes">Lucas Mendes</option>
+                                <option value="Fernanda Costa">Fernanda Costa</option>
+                                <option value="Rafael Pereira">Rafael Pereira</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning text-white">Salvar Alteraçõess</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bibliotecas/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bibliotecas/jquery/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>

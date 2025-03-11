@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargos - Gerenciador de Academia</title>
+    <link href="bibliotecas/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">Gerenciador de Academia</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a class="nav-link" href="agendamentos.html"><i class="fas fa-calendar-alt"></i> Agendamentos</a>
+                <a class="nav-link" href="aulas.html"><i class="fas fa-book"></i> Aulas</a>
+                <a class="nav-link active" href="cargos.html"><i class="fas fa-briefcase"></i> Cargos</a>
+                <a class="nav-link" href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+                <a class="nav-link" href="estoque.html"><i class="fas fa-dumbbell"></i> Estoque</a>
+                <a class="nav-link" href="financeiro.html"><i class="fas fa-dollar-sign"></i> Financeiro</a>
+                <a class="nav-link" href="funcionarios.html"><i class="fas fa-user-tie"></i> Funcionários</a>
+                <a class="nav-link" href="instrutores.html"><i class="fas fa-chalkboard-teacher"></i> Instrutores</a>
+                <a class="nav-link" href="planos.html"><i class="fas fa-list-alt"></i> Planos</a>
+                <a class="nav-link" href="vendas.html"><i class="fas fa-shopping-cart"></i> Vendas</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Cargos</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Salário</th>
+                    <th>Comissão</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaCargos"></tbody>
+        </table>
+
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCadastroCargos"><i class="fas fa-plus-circle"></i> Cadastrar Novo Cargo</button>
+        <button class="btn btn-warning" id="btnEditarCargo" disabled data-bs-toggle="modal" data-bs-target="#modalEdicaoCargos"><i class="fas fa-edit"></i> Editar Cargo</button>
+        <button class="btn btn-danger" id="btnRemoverCargo" disabled><i class="fas fa-trash-alt"></i> Remover Cargo</button>
+
+        <a href="dashboard.html" class="btn btn-secondary">Voltar</a>
+    </div>
+
+    <div class="modal fade" id="modalCadastroCargos" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Cadastrar Cargo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCadastroCargos">
+                        <div class="mb-3">
+                            <label class="form-label">Nome do Cargo:</label>
+                            <input type="text" id="nomeCadastroCargo" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Salário:</label>
+                            <input type="text" id="salarioCadastroCargo" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Comissão (%):</label>
+                            <input type="text" id="comissaoCadastroCargo" class="form-control" maxlength="3">
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Cadastrar Cargo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEdicaoCargos" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title">Editar Cargo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdicaoCargos">
+                        <input type="hidden" id="idEdicaoCargo">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nome do Cargo:</label>
+                            <input type="text" id="nomeEdicaoCargo" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Salário:</label>
+                            <input type="text" id="salarioEdicaoCargo" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Comissão (%):</label>
+                            <input type="text" id="comissaoEdicaoCargo" class="form-control" maxlength="3">
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning text-white">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bibliotecas/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="bibliotecas/jquery/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>

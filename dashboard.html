@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Gerenciador de Academia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="bibliotecas/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <span class="logo">Gerenciador de Academia</span>
+        <div class="user-info">
+            <span id="userName">Bem-vindo, Admin</span>
+            <i class="fas fa-sign-out-alt logout-icon" id="logout"></i>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <h2>Selecione uma opção</h2>
+        <div class="grid-container">
+            <div class="grid-item" onclick="window.location.href='agendamentos.html'">
+                <img src="img/agendamentos.png" alt="Agendamentos">
+                <p>Agendamentos</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='aulas.html'">
+                <img src="img/aulas.png" alt="Aulas">
+                <p>Aulas</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='cargos.html'">
+                <img src="img/cargos.png" alt="Cargos">
+                <p>Cargos</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='clientes.html'">
+                <img src="img/clientes.png" alt="Clientes">
+                <p>Clientes</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='estoque.html'">
+                <img src="img/estoque.png" alt="Estoque">
+                <p>Estoque</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='financeiro.html'">
+                <img src="img/financeiro.png" alt="Financeiro">
+                <p>Financeiro</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='funcionarios.html'">
+                <img src="img/funcionarios.png" alt="Funcionários">
+                <p>Funcionários</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='instrutores.html'">
+                <img src="img/instrutores.png" alt="Instrutores">
+                <p>Instrutores</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='planos.html'">
+                <img src="img/planos.png" alt="Planos">
+                <p>Planos</p>
+            </div>
+            <div class="grid-item" onclick="window.location.href='vendas.html'">
+                <img src="img/vendas.png" alt="Vendas">
+                <p>Vendas</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="bibliotecas/jquery/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>
